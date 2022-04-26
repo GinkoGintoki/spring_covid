@@ -1,6 +1,6 @@
 package org.ginko.covidstat.controller;
 
-import org.ginko.covidstat.model.Hospital;
+import org.ginko.covidstat.dto.HospitalDTO;
 import org.ginko.covidstat.service.HospitalService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ public class HospitalController {
     }
 
     @GetMapping("/get")
-    public List<Hospital> getHospitalInfo(@RequestParam("city") Long cityId) {
-        return hospitalService.getHospitalByCityId(cityId);
+    public List<HospitalDTO> getHospitalInfo(@RequestParam("city") Long cityId) {
+        return hospitalService.getHospitalsByCityId(cityId);
     }
 }

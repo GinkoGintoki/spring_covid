@@ -1,11 +1,10 @@
 package org.ginko.covidstat.dto;
 
-import org.ginko.covidstat.model.DailyCategory;
-import org.ginko.covidstat.model.DailyHospital;
+import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
+@Data
 public class HospitalDTO {
 
     private Long id;
@@ -14,11 +13,15 @@ public class HospitalDTO {
 
     private String cityName;
 
-    private Long totalCase;
+    private Long totalCases;
 
     private Long totalDeaths;
 
     private Long totalRecoveries;
 
-    private LocalDateTime dtUpdate;
+    private LocalDateTime dtUpdateTotal;
+
+    private DailyHospitalToHospitalDTO dailyHospitalToHospitalDTO;
+
+    private CategoryDTO categoryDTO;
 }

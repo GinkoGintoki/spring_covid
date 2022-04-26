@@ -3,14 +3,6 @@ package org.ginko.covidstat.dto;
 import java.time.LocalDateTime;
 
 public class DailyHospitalToHospitalDTO {
-    public DailyHospitalToHospitalDTO(Long cases, Long deaths, Long recoveries, Long cityId, LocalDateTime dateTime) {
-        this.cases = cases;
-        this.deaths = deaths;
-        this.recoveries = recoveries;
-        this.cityId = cityId;
-        this.dateTime = dateTime;
-    }
-
     private Long cases;
 
     private Long deaths;
