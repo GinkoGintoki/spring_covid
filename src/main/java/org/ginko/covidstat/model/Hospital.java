@@ -18,12 +18,6 @@ public class Hospital extends TotalStatModel {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @OneToMany(mappedBy = "hospital")
-    private List<DailyHospital> dailyHospitals;
-
-    @OneToMany(mappedBy = "hospital")
-    private List<DailyCategory> dailyCategoryList;
-
     private LocalDateTime dtUpdate;
 
     public String getName() {
@@ -42,27 +36,21 @@ public class Hospital extends TotalStatModel {
         this.city = city;
     }
 
-    public List<DailyHospital> getDailyHospitals() {
-        return dailyHospitals;
-    }
-
-    public void setDailyHospitals(List<DailyHospital> dailyHospitals) {
-        this.dailyHospitals = dailyHospitals;
-    }
-
-    public List<DailyCategory> getDailyCategoryList() {
-        return dailyCategoryList;
-    }
-
-    public void setDailyCategoryList(List<DailyCategory> dailyCategoryList) {
-        this.dailyCategoryList = dailyCategoryList;
-    }
-
     public LocalDateTime getDtUpdate() {
         return dtUpdate;
     }
 
     public void setDtUpdate(LocalDateTime dtUpdate) {
         this.dtUpdate = dtUpdate;
+    }
+
+    @Override
+    public String toString() {
+        return "Hospital{" +
+                "id: " + getId() +
+                ",name='" + name + '\'' +
+                ", city=" + city +
+                ", dtUpdate=" + dtUpdate +
+                '}';
     }
 }

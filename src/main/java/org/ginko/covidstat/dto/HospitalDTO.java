@@ -3,6 +3,7 @@ package org.ginko.covidstat.dto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class HospitalDTO {
@@ -21,7 +22,7 @@ public class HospitalDTO {
 
     private LocalDateTime dtUpdateTotal;
 
-    private DailyHospitalToHospitalDTO dailyHospitalToHospitalDTO;
+    private List<DailyHospitalToHospitalDTO> dailyHospitalToHospitalDTO;
 
     private CategoryDTO categoryDTO;
 }

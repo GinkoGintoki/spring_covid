@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface DailyHospitalSearchRepository extends org.springframework.data.repository.Repository<DailyHospital, Long> {
-    List<DailyHospitalToCityDTO> getDailyHospitalsToCity(Long cityId);
-
-    List<DailyHospitalToHospitalDTO> getDailyHospitalsToHospital(Long hospitalId);
+//    List<DailyHospitalToCityDTO> getDailyHospitalsToCity(Long cityId);
+//
+//    List<DailyHospitalToHospitalDTO> getDailyHospitalsToHospital(Long hospitalId);
 }
