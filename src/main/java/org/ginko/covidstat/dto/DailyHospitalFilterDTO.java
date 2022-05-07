@@ -1,5 +1,8 @@
 package org.ginko.covidstat.dto;
 
+import lombok.Data;
+
+@Data
 public class DailyHospitalFilterDTO {
 
     private Long newCases;

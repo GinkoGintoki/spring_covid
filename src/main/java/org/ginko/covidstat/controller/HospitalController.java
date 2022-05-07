@@ -1,11 +1,10 @@
 package org.ginko.covidstat.controller;
 
 import org.ginko.covidstat.dto.HospitalDTO;
+import org.ginko.covidstat.model.DailyHospital;
+import org.ginko.covidstat.model.Hospital;
 import org.ginko.covidstat.service.HospitalService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +18,18 @@ public class HospitalController {
         this.hospitalService = hospitalService;
     }
 
-    @GetMapping("/get")
-    public List<HospitalDTO> getHospitalInfo(@RequestParam("city") Long cityId) {
-        return hospitalService.getHospitalsByCityId(cityId);
+    @GetMapping("/info/get")
+    public HospitalDTO getHospitalInfo(@RequestParam("city") Long cityId, @RequestParam("hospital") Long hospitalId) {
+        return hospitalService.getHospitalsByCityId(cityId, hospitalId);
+    }
+
+    @GetMapping("/getAll")
+    public List<Hospital> getHospitals() {
+        return hospitalService.getAll();
+    }
+
+    @GetMapping("/daily/get/{id}")
+    public DailyHospital getDailyHospital(@PathVariable("id") Long id) {
+        return hospitalService.getDailyHospital(id);
     }
 }

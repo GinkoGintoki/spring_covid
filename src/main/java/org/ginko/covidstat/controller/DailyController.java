@@ -22,7 +22,7 @@ public class DailyController {
     }
 
     @PostMapping(value = "/hospitals")
-    public Map<String, Object> updateDailyHospitals(@RequestBody List<DailyHospitalFilterDTO> hospitalDTOS) {
+    public Map<String, Object> updateDailyHospitals(@RequestBody DailyHospitalFilterDTO hospitalDTOS) {
         return dailyService.updateDailyHospital(hospitalDTOS);
     }
 

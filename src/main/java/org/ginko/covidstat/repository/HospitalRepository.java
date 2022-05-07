@@ -16,5 +16,5 @@ public interface HospitalRepository extends JpaRepository<Hospital, Long> {
     @Query("update Hospital set totalCases = :cases, totalDeaths=:deaths, totalRecoveries=:recoveries, dtUpdate = :dateTime where id=:id")
     void updateHospital(Long id, Long cases, Long deaths, Long recoveries, LocalDateTime dateTime);
 
-    List<Hospital> findHospitalsByCity(City city);
+    Hospital findHospitalByCityIdAndId(Long cityId, Long id);
 }

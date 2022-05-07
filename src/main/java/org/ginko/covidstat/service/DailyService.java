@@ -8,12 +8,13 @@ import org.ginko.covidstat.model.DailyHospital;
 import org.ginko.covidstat.model.Hospital;
 import org.ginko.covidstat.repository.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.*;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class DailyService {
@@ -34,22 +35,22 @@ public class DailyService {
     }
 
     @Transactional
-    public Map<String, Object> updateDailyHospital(List<DailyHospitalFilterDTO> dailyHospitalFilterDTOList) {
-        for (DailyHospitalFilterDTO dto : dailyHospitalFilterDTOList) {
-            DailyHospital dailyHospital = new DailyHospital();
-            dailyHospital.setNewCases(dto.getNewCases() != null ? dto.getNewCases() : 0);
-            dailyHospital.setNewDeaths(dto.getNewDeaths() != null ? dto.getNewDeaths() : 0);
-            dailyHospital.setNewRecoveries(dto.getNewRecoveries() != null ? dto.getNewRecoveries() : 0);
-            Hospital hospital = dailyHospital.getHospital();
-            hospitalRepository.updateHospital(hospital.getId(), hospital.getTotalCases() + dailyHospital.getNewCases(),
-                    hospital.getTotalDeaths() + dailyHospital.getNewDeaths(),
-                    hospital.getTotalRecoveries() + dailyHospital.getNewRecoveries(), LocalDateTime.now());
-            City city = hospital.getCity();
-            cityRepository.updateCity(city.getId(), city.getTotalCases() + hospital.getTotalCases(),
-                    city.getTotalDeaths() + hospital.getTotalDeaths(),
-                    city.getTotalRecoveries() + hospital.getTotalRecoveries(), LocalDateTime.now());
-            dailyHospitalRepository.save(dailyHospital);
-        }
+    public Map<String, Object> updateDailyHospital(DailyHospitalFilterDTO dto) {
+        DailyHospital dailyHospital = new DailyHospital();
+        dailyHospital.setNewCases(dto.getNewCases() != null ? dto.getNewCases() : 0);
+        dailyHospital.setNewDeaths(dto.getNewDeaths() != null ? dto.getNewDeaths() : 0);
+        dailyHospital.setNewRecoveries(dto.getNewRecoveries() != null ? dto.getNewRecoveries() : 0);
+        dailyHospital.setHospital(hospitalRepository.findById(dto.getHospitalId()).orElse(null));
+        Hospital hospital = dailyHospital.getHospital();
+        hospitalRepository.updateHospital(hospital.getId(), Objects.requireNonNullElse(hospital.getTotalCases(), 0L) + dailyHospital.getNewCases(),
+                Objects.requireNonNullElse(hospital.getTotalDeaths(), 0L) + dailyHospital.getNewDeaths(),
+                Objects.requireNonNullElse(hospital.getTotalRecoveries(), 0L) + dailyHospital.getNewRecoveries(), LocalDateTime.now());
+        City city = hospital.getCity();
+        cityRepository.updateCity(city.getId(), Objects.requireNonNullElse(city.getTotalCases(), 0L) + dailyHospital.getNewCases(),
+                Objects.requireNonNullElse(city.getTotalDeaths(), 0L) + dailyHospital.getNewDeaths(),
+                Objects.requireNonNullElse(city.getTotalRecoveries(), 0L) + dailyHospital.getNewRecoveries(), LocalDateTime.now());
+        dailyHospitalRepository.save(dailyHospital);
+
         return new HashMap<>() {
             {
                 put("status", true);

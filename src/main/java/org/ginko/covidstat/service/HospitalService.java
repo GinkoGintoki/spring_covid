@@ -26,36 +26,36 @@ public class HospitalService {
         this.dailyHospitalRepository = dailyHospitalRepository1;
     }
 
-    public List<HospitalDTO> getHospitalsByCityId(Long cityId) {
-        List<Hospital> hospitals = hospitalRepository.findHospitalsByCity(cityRepository.getById(cityId));
-        List<HospitalDTO> dtos = new ArrayList<>();
-        for (Hospital hospital : hospitals) {
-            System.out.println(hospital.toString());
-            HospitalDTO hospitalDTO = new HospitalDTO();
-            hospitalDTO.setId(hospital.getId());
-            hospitalDTO.setTotalCases(hospital.getTotalCases());
-            hospitalDTO.setTotalDeaths(hospital.getTotalDeaths());
-            hospitalDTO.setTotalRecoveries(hospital.getTotalRecoveries());
-            hospitalDTO.setDtUpdateTotal(hospital.getDtUpdate());
-            hospitalDTO.setCityName(hospital.getCity().getName());
-            List<DailyHospital> dailyHospitals = dailyHospitalRepository.getDailyHospitalsToHospital();
-            List<DailyHospitalToHospitalDTO> dailyHospitalToHospitalDTOS = new ArrayList<>();
-            for (DailyHospital dailyHospital : dailyHospitals) {
-                DailyHospitalToHospitalDTO dailyHospitalToHospitalDTO = new DailyHospitalToHospitalDTO();
-                dailyHospitalToHospitalDTO.setCases(dailyHospital.getNewCases());
-                dailyHospitalToHospitalDTO.setDeaths(dailyHospital.getNewDeaths());
-                dailyHospitalToHospitalDTO.setRecoveries(dailyHospital.getNewRecoveries());
-                dailyHospitalToHospitalDTO.setDateTime(dailyHospital.getDtUpdate());
-                dailyHospitalToHospitalDTOS.add(dailyHospitalToHospitalDTO);
-            }
-            hospitalDTO.setDailyHospitalToHospitalDTO(dailyHospitalToHospitalDTOS);
-            dtos.add(hospitalDTO);
+    public HospitalDTO getHospitalsByCityId(Long cityId, Long hospitalId) {
+        Hospital hospital = hospitalRepository.findHospitalByCityIdAndId(cityId, hospitalId);
+
+        HospitalDTO hospitalDTO = new HospitalDTO();
+        hospitalDTO.setId(hospital.getId());
+        hospitalDTO.setTotalCases(hospital.getTotalCases());
+        hospitalDTO.setTotalDeaths(hospital.getTotalDeaths());
+        hospitalDTO.setTotalRecoveries(hospital.getTotalRecoveries());
+        hospitalDTO.setDtUpdateTotal(hospital.getDtUpdate());
+        hospitalDTO.setCityName(hospital.getCity().getName());
+        List<DailyHospital> dailyHospitals = dailyHospitalRepository.getDailyHospitalsToHospital(hospital.getId());
+        List<DailyHospitalToHospitalDTO> dailyHospitalToHospitalDTOS = new ArrayList<>();
+        for (DailyHospital dailyHospital : dailyHospitals) {
+            DailyHospitalToHospitalDTO dailyHospitalToHospitalDTO = new DailyHospitalToHospitalDTO();
+            dailyHospitalToHospitalDTO.setCases(dailyHospital.getNewCases());
+            dailyHospitalToHospitalDTO.setDeaths(dailyHospital.getNewDeaths());
+            dailyHospitalToHospitalDTO.setRecoveries(dailyHospital.getNewRecoveries());
+            dailyHospitalToHospitalDTO.setDateTime(dailyHospital.getDtUpdate());
+            dailyHospitalToHospitalDTOS.add(dailyHospitalToHospitalDTO);
         }
-        return dtos;
+        hospitalDTO.setDailyHospitalToHospitalDTO(dailyHospitalToHospitalDTOS);
+
+        return hospitalDTO;
     }
 
-    public List<DailyHospitalToCityDTO> getDailyHospitalsByCity() {
-        return null;
+    public List<Hospital> getAll() {
+        return hospitalRepository.findAll();
     }
 
+    public DailyHospital getDailyHospital(Long id) {
+        return dailyHospitalRepository.findTopByIdOrderByIdDesc(id);
+    }
 }

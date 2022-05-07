@@ -8,7 +8,6 @@ public class DailyHospitalToCityDTO {
     private Long deaths;
 
     private Long recoveries;
-
     private Long cityId;
 
     private LocalDateTime dateTime;
@@ -37,19 +36,19 @@ public class DailyHospitalToCityDTO {
         this.recoveries = recoveries;
     }
 
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
-    }
-
     public LocalDateTime getDateTime() {
         return dateTime;
     }
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 }

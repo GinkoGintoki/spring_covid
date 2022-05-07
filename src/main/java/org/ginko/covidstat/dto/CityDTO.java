@@ -23,13 +23,13 @@ public class CityDTO {
 
     private Long totalRecoveries;
 
-    private List<DailyCityDTO> dailyCity;
+    private List<DailyHospitalToCityDTO> dailyCity;
 
-    public List<DailyCityDTO> getDailyCity() {
+    public List<DailyHospitalToCityDTO> getDailyCity() {
         return dailyCity;
     }
 
-    public void setDailyCity(List<DailyCityDTO> dailyCity) {
+    public void setDailyCity(List<DailyHospitalToCityDTO> dailyCity) {
         this.dailyCity = dailyCity;
     }
 
