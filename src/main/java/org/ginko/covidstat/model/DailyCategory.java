@@ -1,5 +1,6 @@
 package org.ginko.covidstat.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.ginko.covidstat.model.base.NewStatModel;
 
@@ -15,10 +16,12 @@ import java.time.LocalDateTime;
 public class DailyCategory extends NewStatModel {
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 

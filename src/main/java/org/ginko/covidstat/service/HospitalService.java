@@ -1,6 +1,5 @@
 package org.ginko.covidstat.service;
 
-import org.ginko.covidstat.dto.DailyHospitalToCityDTO;
 import org.ginko.covidstat.dto.DailyHospitalToHospitalDTO;
 import org.ginko.covidstat.dto.HospitalDTO;
 import org.ginko.covidstat.model.DailyHospital;
@@ -26,7 +25,7 @@ public class HospitalService {
         this.dailyHospitalRepository = dailyHospitalRepository1;
     }
 
-    public HospitalDTO getHospitalsByCityId(Long cityId, Long hospitalId) {
+    public HospitalDTO getHospitalByCityId(Long cityId, Long hospitalId) {
         Hospital hospital = hospitalRepository.findHospitalByCityIdAndId(cityId, hospitalId);
 
         HospitalDTO hospitalDTO = new HospitalDTO();
@@ -57,5 +56,9 @@ public class HospitalService {
 
     public DailyHospital getDailyHospital(Long id) {
         return dailyHospitalRepository.findTopByIdOrderByIdDesc(id);
+    }
+
+    public List<Hospital> getHospitalsByCityId(Long id) {
+        return hospitalRepository.findHospitalsByCityId(id);
     }
 }

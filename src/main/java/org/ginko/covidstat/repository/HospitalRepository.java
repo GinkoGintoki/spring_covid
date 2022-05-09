@@ -17,4 +17,9 @@ public interface HospitalRepository extends JpaRepository<Hospital, Long> {
     void updateHospital(Long id, Long cases, Long deaths, Long recoveries, LocalDateTime dateTime);
 
     Hospital findHospitalByCityIdAndId(Long cityId, Long id);
+
+    Hospital findTopByCityIdOrderByDtUpdate(Long cityId);
+
+    List<Hospital> findHospitalsByCityId(Long city_id);
+
 }

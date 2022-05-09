@@ -1,5 +1,6 @@
 package org.ginko.covidstat.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.ginko.covidstat.model.base.TotalStatModel;
 
@@ -15,6 +16,7 @@ public class Hospital extends TotalStatModel {
     private String name;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "city_id")
     private City city;
 

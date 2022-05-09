@@ -23,9 +23,14 @@ public class CityController {
         return cityService.getAllCities();
     }
 
-    @GetMapping("/info/get")
-    public CityDTO getCityInfo(@RequestParam(name = "city") Long cityId) {
+    @GetMapping("/info/get/{id}")
+    public CityDTO getCityInfo(@PathVariable(name = "id") Long cityId) {
         return cityService.getCityInfo(cityId);
+    }
+
+    @GetMapping("/get/hospital/{id}")
+    public Long getHospitalId(@PathVariable Long id) {
+        return cityService.getHospitalByCity(id);
     }
 
     @GetMapping("/daily/get/{id}")

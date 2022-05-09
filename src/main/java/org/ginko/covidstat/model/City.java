@@ -1,5 +1,6 @@
 package org.ginko.covidstat.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class City extends TotalStatModel {
     private LocalDateTime dtUpdate;
 
     @OneToMany(mappedBy = "city")
+    @JsonManagedReference
     private List<Hospital> hospitals;
 
     public String getName() {

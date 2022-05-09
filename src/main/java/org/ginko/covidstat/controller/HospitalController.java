@@ -20,12 +20,17 @@ public class HospitalController {
 
     @GetMapping("/info/get")
     public HospitalDTO getHospitalInfo(@RequestParam("city") Long cityId, @RequestParam("hospital") Long hospitalId) {
-        return hospitalService.getHospitalsByCityId(cityId, hospitalId);
+        return hospitalService.getHospitalByCityId(cityId, hospitalId);
     }
 
     @GetMapping("/getAll")
     public List<Hospital> getHospitals() {
         return hospitalService.getAll();
+    }
+
+    @GetMapping("/info/city/get/{id}")
+    public List<Hospital> getHospitalsByCity(@PathVariable Long id) {
+        return hospitalService.getHospitalsByCityId(id);
     }
 
     @GetMapping("/daily/get/{id}")

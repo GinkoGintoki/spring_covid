@@ -12,7 +12,7 @@ class HospitalServiceTest {
 
     @Test
     void getHospitalsByCityId() {
-        hospitalService.getHospitalsByCityId(1L);
+        hospitalService.getHospitalByCityId(1L);
     }
 
     @Test

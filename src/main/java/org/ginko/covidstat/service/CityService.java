@@ -7,6 +7,7 @@ import org.ginko.covidstat.dto.DailyHospitalToCityDTO;
 import org.ginko.covidstat.model.City;
 import org.ginko.covidstat.repository.CityRepository;
 import org.ginko.covidstat.repository.DailyHospitalRepository;
+import org.ginko.covidstat.repository.HospitalRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,9 +20,12 @@ public class CityService {
 
     private final DailyHospitalRepository dailyHospitalRepository;
 
-    public CityService(CityRepository cityRepository, DailyHospitalRepository dailyHospitalRepository) {
+    private HospitalRepository hospitalRepository;
+
+    public CityService(CityRepository cityRepository, DailyHospitalRepository dailyHospitalRepository, HospitalRepository hospitalRepository) {
         this.cityRepository = cityRepository;
         this.dailyHospitalRepository = dailyHospitalRepository;
+        this.hospitalRepository = hospitalRepository;
     }
 
     public List<City> getAllCities() {
@@ -37,6 +41,7 @@ public class CityService {
         cityDTO.setTotalCases(city.getTotalCases());
         cityDTO.setTotalDeaths(city.getTotalDeaths());
         cityDTO.setTotalRecoveries(city.getTotalRecoveries());
+        cityDTO.setDtUpdate(city.getDtUpdate());
         List<DailyHospitalQuery> dtos = dailyHospitalRepository.getDailyHospitalsToCity(cityId);
         List<DailyHospitalToCityDTO> res = new ArrayList<>();
         for (DailyHospitalQuery dto : dtos) {
@@ -60,5 +65,9 @@ public class CityService {
         dto.setRecoveries(dailyHospitalQuery.getRecoveries());
         dto.setDtUpdate(dailyHospitalQuery.getDateTime());
         return dto;
+    }
+
+    public Long getHospitalByCity(Long id) {
+        return hospitalRepository.findTopByCityIdOrderByDtUpdate(id).getId();
     }
 }
