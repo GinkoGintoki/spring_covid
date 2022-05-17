@@ -1,7 +1,6 @@
 package org.ginko.covidstat.controller;
 
 import org.ginko.covidstat.dto.HospitalDTO;
-import org.ginko.covidstat.model.DailyHospital;
 import org.ginko.covidstat.model.Hospital;
 import org.ginko.covidstat.service.HospitalService;
 import org.springframework.web.bind.annotation.*;
@@ -31,10 +30,5 @@ public class HospitalController {
     @GetMapping("/info/city/get/{id}")
     public List<Hospital> getHospitalsByCity(@PathVariable Long id) {
         return hospitalService.getHospitalsByCityId(id);
-    }
-
-    @GetMapping("/daily/get/{id}")
-    public DailyHospital getDailyHospital(@PathVariable("id") Long id) {
-        return hospitalService.getDailyHospital(id);
     }
 }

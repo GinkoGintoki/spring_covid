@@ -1,13 +1,10 @@
 package org.ginko.covidstat.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.ginko.covidstat.model.DailyHospital;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Setter
@@ -25,16 +22,6 @@ public class CityDTO {
     private Long totalRecoveries;
 
     private LocalDateTime dtUpdate;
-
-    private List<DailyHospitalToCityDTO> dailyCity;
-
-    public List<DailyHospitalToCityDTO> getDailyCity() {
-        return dailyCity;
-    }
-
-    public void setDailyCity(List<DailyHospitalToCityDTO> dailyCity) {
-        this.dailyCity = dailyCity;
-    }
 
     public Long getId() {
         return id;
