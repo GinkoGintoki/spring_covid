@@ -11,7 +11,4 @@ import java.time.LocalDateTime;
 @Repository
 public interface CityRepository extends JpaRepository<City, Long> {
 
-    @Modifying
-    @Query("update City set totalCases = :cases, totalDeaths=:deaths, totalRecoveries=:recoveries, dtUpdate =:dateTime where id=:id")
-    void updateCity(Long id, Long cases, Long deaths, Long recoveries, LocalDateTime dateTime);
 }
